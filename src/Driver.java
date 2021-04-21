@@ -47,7 +47,7 @@ public class Driver {
         }
 
         // run and print shortest path for a startNode, endNode, and user
-        graph.dijkstraPrintPaths(nodes[startIndex], nodes[endIndex], user);
+        graph.aStarPrintPaths(nodes[startIndex], nodes[endIndex], user);
 
     }
 
@@ -59,7 +59,7 @@ public class Driver {
                 return User.COLOR_BLIND;
             case 0:
             default:
-                return User.NORMAL;
+                return User.DEFAULT;
         }
     }
 

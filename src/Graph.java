@@ -37,7 +37,7 @@ public class Graph {
         return (int) (Math.pow(endNode.x - nextNode.x, 2) + Math.pow(endNode.y - nextNode.y, 2));
     }
 
-    public void dijkstraPrintPaths(Node startNode, Node endNode, User user) {
+    public void aStarPrintPaths(Node startNode, Node endNode, User user) {
 
         int startIndex = startNode.index;
 
@@ -100,8 +100,8 @@ public class Graph {
                         }
                     }
                     if (nextIndex == endNode.index) {
-                        // print dijkstra path
-                        printDijkstra(parentIndices, minDists, startIndex, endNode.index);
+                        // print a* path
+                        printAStar(parentIndices, minDists, startIndex, endNode.index);
                         return;
                     }
                 }
@@ -110,8 +110,8 @@ public class Graph {
         System.out.println("Error");
     }
 
-    public void printDijkstra(int[] parent, int[] distance, int sourceIndex, int destinationIndex) {
-        System.out.println("Dijkstra Algorithm: ");
+    public void printAStar(int[] parent, int[] distance, int sourceIndex, int destinationIndex) {
+        System.out.println("A* Algorithm: ");
         System.out.print(" " + sourceIndex + " --> " + destinationIndex + ": distance = " + distance[destinationIndex] + "  Path : ");
         printPathUtil(parent, destinationIndex);
         System.out.println();

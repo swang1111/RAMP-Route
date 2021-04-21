@@ -1,5 +1,5 @@
 public enum User {
-    NORMAL,
+    DEFAULT,
     WHEELCHAIR,
     COLOR_BLIND
 }

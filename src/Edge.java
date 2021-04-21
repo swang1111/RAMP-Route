@@ -27,7 +27,7 @@ public class Edge {
                 return weights.get(1);
             case COLOR_BLIND:
                 return weights.get(2);
-            case NORMAL:
+            case DEFAULT:
             default:
                 return weights.get(0);
         }
