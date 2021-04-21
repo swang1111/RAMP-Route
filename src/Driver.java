@@ -15,14 +15,13 @@ public class Driver {
         Node n4 = new Node(4, 1, 0);
         Node n5 = new Node(5, 2, 1);
 
-
-        graph.addEdge(n0, n1, 5);
-        graph.addEdge(n0, n2, 3);
-        graph.addEdge(n1, n2, 1);
-        graph.addEdge(n1, n3, 2);
-        graph.addEdge(n2, n3, 4);
-        graph.addEdge(n3, n4, 2);
-        graph.addEdge(n4, n5, 6);
+        graph.addEdge(n0, n1);
+        graph.addEdge(n0, n2);
+        graph.addEdge(n1, n2);
+        graph.addEdge(n1, n3);
+        graph.addEdge(n2, n3);
+        graph.addEdge(n3, n4);
+        graph.addEdge(n4, n5);
 
         graph.dijkstra_PrintPaths(n0);
 

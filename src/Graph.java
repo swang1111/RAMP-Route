@@ -21,9 +21,9 @@ public class Graph {
         }
     }
 
-    public void addEdge(Node source, Node destination, int weight) {
-        // taking heuristic into account (in this case, it's distance)
-        // weight += calculateDist(source, destination);
+    public void addEdge(Node source, Node destination) {
+        // calculating weight as distance between two Cartesian coordinates
+        int weight = calculateDist(source, destination);
 
         Edge edge = new Edge(source, destination, weight);
         adjacencylist[source.index].add(edge);
