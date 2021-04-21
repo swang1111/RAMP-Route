@@ -54,9 +54,13 @@ public class Driver {
     public static User getUserEnum(int userIndex) {
         switch (userIndex) {
             case 1:
-                return User.WHEELCHAIR;
+                return User.POWER_WHEELCHAIR;
             case 2:
+                return User.MANUAL_WHEELCHAIR;
+            case 3:
                 return User.COLOR_BLIND;
+            case 4:
+                return User.AUTISTIC;
             case 0:
             default:
                 return User.DEFAULT;

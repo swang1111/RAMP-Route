@@ -34,7 +34,7 @@ public class Graph {
 
     public int calculateDist(Node nextNode, Node endNode) {
         // calculating weight as distance between two Cartesian coordinates
-        return (int) (Math.pow(endNode.x - nextNode.x, 2) + Math.pow(endNode.y - nextNode.y, 2));
+        return (int) (Math.sqrt(Math.pow(endNode.x - nextNode.x, 2) + Math.pow(endNode.y - nextNode.y, 2)));
     }
 
     public void aStarPrintPaths(Node startNode, Node endNode, User user) {

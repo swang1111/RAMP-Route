@@ -23,10 +23,14 @@ public class Edge {
 
     public int getEdgeWeight(User user) {
         switch (user) {
-            case WHEELCHAIR:
+            case POWER_WHEELCHAIR:
                 return weights.get(1);
-            case COLOR_BLIND:
+            case MANUAL_WHEELCHAIR:
                 return weights.get(2);
+            case COLOR_BLIND:
+                return weights.get(3);
+            case AUTISTIC:
+                return weights.get(4);
             case DEFAULT:
             default:
                 return weights.get(0);

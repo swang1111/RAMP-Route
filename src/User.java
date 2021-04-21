@@ -1,5 +1,7 @@
 public enum User {
     DEFAULT,
-    WHEELCHAIR,
-    COLOR_BLIND
+    POWER_WHEELCHAIR,
+    MANUAL_WHEELCHAIR,
+    COLOR_BLIND,
+    AUTISTIC
 }
