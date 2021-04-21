@@ -9,65 +9,65 @@ import java.util.PriorityQueue;
 
 public class Graph {
 
-    int vertices;
+    int numNodes;
     ArrayList<Edge>[] adjacencylist;
     Node[] nodes;
 
-    public Graph(int vertices, Node[] nodes) {
-        this.vertices = vertices;
-        adjacencylist = new ArrayList[vertices];
+    public Graph(int numNodes, Node[] nodes) {
+        this.numNodes = numNodes;
+        adjacencylist = new ArrayList[numNodes];
         // initialize adjacency lists for all the vertices
-        for (int i = 0; i < vertices; i++) {
+        for (int i = 0; i < numNodes; i++) {
             adjacencylist[i] = new ArrayList<>();
         }
         this.nodes = nodes;
     }
 
-    public void addEdge(Node source, Node destination, ArrayList<Integer> weights) {
-        Edge edge = new Edge(source, destination, weights);
-        adjacencylist[source.index].add(edge);
+    public void addEdge(Node curNode, Node nextNode, ArrayList<Integer> weights) {
+        Edge edge = new Edge(curNode, nextNode, weights);
+        adjacencylist[curNode.index].add(edge);
 
         // for undirected graph
-        edge = new Edge(destination, source, weights);
-        adjacencylist[destination.index].add(edge);
+        edge = new Edge(nextNode, curNode, weights);
+        adjacencylist[nextNode.index].add(edge);
     }
 
-    public int calculateDist(Node node, Node destination) {
+    public int calculateDist(Node nextNode, Node endNode) {
         // calculating weight as distance between two Cartesian coordinates
-        return (int) (Math.pow(destination.x - node.x, 2) + Math.pow(destination.y - node.y, 2));
+        return (int) (Math.pow(endNode.x - nextNode.x, 2) + Math.pow(endNode.y - nextNode.y, 2));
     }
 
-    public void dijkstra_PrintPaths(Node sourceNode, Node destinationNode, User user) {
+    public void dijkstraPrintPaths(Node startNode, Node endNode, User user) {
 
-        int sourceVertex = sourceNode.index;
+        int startIndex = startNode.index;
 
-        boolean[] SPT = new boolean[vertices];
+        boolean[] SPT = new boolean[numNodes];
         // distance used to store the distance of vertex from a source
-        int[] distance = new int[vertices];
+        int[] minDists = new int[numNodes];
 
-        int[] parentVertex = new int[vertices];
+        int[] parentIndices = new int[numNodes];
 
         // parent of the source vertex will be -1
-        parentVertex[0] = -1;
+        parentIndices[0] = -1;
 
         // Initialize all the distance to infinity
-        for (int i = 0; i < vertices; i++) {
-            distance[i] = Integer.MAX_VALUE / 3;
+        for (int i = 0; i < numNodes; i++) {
+            minDists[i] = Integer.MAX_VALUE / 3;
         }
         // Initialize priority queue
         // override the comparator to do the sorting based keys
-        PriorityQueue<Pair<Integer, Integer>> pq = new PriorityQueue<>(vertices, new Comparator<Pair<Integer, Integer>>() {
+        PriorityQueue<Pair<Integer, Integer>> pq = new PriorityQueue<>(numNodes, new Comparator<Pair<Integer, Integer>>() {
             @Override
             public int compare(Pair<Integer, Integer> p1, Pair<Integer, Integer> p2) {
-                //sort using distance values
+                // sort using distance values
                 int key1 = p1.getKey();
                 int key2 = p2.getKey();
                 return key1 - key2;
             }
         });
         // create the pair for for the first index, 0 distance 0 index
-        distance[0] = 0;
-        Pair<Integer, Integer> p0 = new Pair<>(distance[0], 0);
+        minDists[0] = 0;
+        Pair<Integer, Integer> p0 = new Pair<>(minDists[0], 0);
         // add it to pq
         pq.add(p0);
 
@@ -76,7 +76,7 @@ public class Graph {
             // extract the min
             Pair<Integer, Integer> extractedPair = pq.poll();
 
-            // extracted vertex
+            // extracted index (current)
             int curIndex = extractedPair.getValue();
             if (!SPT[curIndex]) {
                 SPT[curIndex] = true;
@@ -85,23 +85,23 @@ public class Graph {
                 ArrayList<Edge> list = adjacencylist[curIndex];
                 for (int i = 0; i < list.size(); i++) {
                     Edge edge = list.get(i);
-                    int nextIndex = edge.end.index;
+                    int nextIndex = edge.dest.index;
                     if (!SPT[nextIndex]) {
                         // check if distance needs an update or not
-                        // means check total weight from source to vertex_V is less than
+                        // means check total weight from source to node is less than
                         // the current distance value, if yes then update the distance
-                        int newKey = distance[curIndex] + calculateDist(nodes[nextIndex], nodes[destinationNode.index]) + edge.getEdgeWeight(user);
-                        int currentKey = distance[nextIndex];
-                        if (currentKey > newKey) {
-                            Pair<Integer, Integer> p = new Pair<>(newKey, nextIndex);
+                        int newWeight = minDists[curIndex] + calculateDist(nodes[nextIndex], nodes[endNode.index]) + edge.getEdgeWeight(user);
+                        int curWeight = minDists[nextIndex];
+                        if (curWeight > newWeight) {
+                            Pair<Integer, Integer> p = new Pair<>(newWeight, nextIndex);
                             pq.offer(p);
-                            distance[nextIndex] = newKey;
-                            parentVertex[nextIndex] = curIndex;
+                            minDists[nextIndex] = newWeight;
+                            parentIndices[nextIndex] = curIndex;
                         }
                     }
-                    if (nextIndex == destinationNode.index) {
+                    if (nextIndex == endNode.index) {
                         // print dijkstra path
-                        printDijkstra(parentVertex, distance, sourceVertex, destinationNode.index);
+                        printDijkstra(parentIndices, minDists, startIndex, endNode.index);
                         return;
                     }
                 }

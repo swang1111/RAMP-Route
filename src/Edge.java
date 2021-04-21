@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 public class Edge {
 
-    Node start;
-    Node end;
+    Node src;
+    Node dest;
     ArrayList<Integer> weights;
 
-    public Edge(Node source, Node destination, ArrayList<Integer> weights) {
-        this.start = source;
-        this.end = destination;
+    public Edge(Node src, Node dest, ArrayList<Integer> weights) {
+        this.src = src;
+        this.dest = dest;
 
         // copy weights
         this.weights = new ArrayList<Integer>();
@@ -34,7 +34,7 @@ public class Edge {
     }
 
     public String toString() {
-        return start + " " + end;
+        return src + " " + dest;
     }
 
 }

@@ -12,7 +12,7 @@ public class Driver {
     public static void main(String[] args) throws IOException {
 
         // Input format (can change, possibly change to JSON?)
-        // numNodes numEdges numUsers sourceIndex destinationIndex userIndex
+        // numNodes numEdges numUsers startIndex endIndex userIndex
         // next numNodes lines --> (x, y)
         // next numEdges lines (n1 connected to n2) --> (n1, n2, w1, w2, w3)
         BufferedReader br = new BufferedReader(new FileReader("Input.txt"));
@@ -21,8 +21,8 @@ public class Driver {
         int numNodes = Integer.parseInt(st.nextToken());
         int numEdges = Integer.parseInt(st.nextToken());
         int numUsers = Integer.parseInt(st.nextToken());
-        int sourceIndex = Integer.parseInt(st.nextToken());
-        int destinationIndex = Integer.parseInt(st.nextToken());
+        int startIndex = Integer.parseInt(st.nextToken());
+        int endIndex = Integer.parseInt(st.nextToken());
         int userIndex = Integer.parseInt(st.nextToken());
 
 
@@ -46,8 +46,8 @@ public class Driver {
             graph.addEdge(nodes[n1], nodes[n2], weights);
         }
 
-        // run and print shortest path for a sourceNode, destinationNode, and user
-        graph.dijkstra_PrintPaths(nodes[sourceIndex], nodes[destinationIndex], user);
+        // run and print shortest path for a startNode, endNode, and user
+        graph.dijkstraPrintPaths(nodes[startIndex], nodes[endIndex], user);
 
     }
 
