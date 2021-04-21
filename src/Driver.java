@@ -1,30 +1,66 @@
 // Modified from online Dijkstras SP code
 // Original source: https://algorithms.tutorialhorizon.com/print-all-paths-in-dijkstras-shortest-path-algorithm/
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 public class Driver {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        int vertices = 6;
-        Graph graph = new Graph(vertices);
+        // Input format (can change, possibly change to JSON?)
+        // numNodes numEdges numUsers sourceIndex destinationIndex userIndex
+        // next numNodes lines --> (x, y)
+        // next numEdges lines (n1 connected to n2) --> (n1, n2, w1, w2, w3)
+        BufferedReader br = new BufferedReader(new FileReader("Input.txt"));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        Node n0 = new Node(0, 1, 1);
-        Node n1 = new Node(1, 3, 3);
-        Node n2 = new Node(2, 2, 2);
-        Node n3 = new Node(3, 4, 4);
-        Node n4 = new Node(4, 1, 0);
-        Node n5 = new Node(5, 2, 1);
+        int numNodes = Integer.parseInt(st.nextToken());
+        int numEdges = Integer.parseInt(st.nextToken());
+        int numUsers = Integer.parseInt(st.nextToken());
+        int sourceIndex = Integer.parseInt(st.nextToken());
+        int destinationIndex = Integer.parseInt(st.nextToken());
+        int userIndex = Integer.parseInt(st.nextToken());
 
-        graph.addEdge(n0, n1);
-        graph.addEdge(n0, n2);
-        graph.addEdge(n1, n2);
-        graph.addEdge(n1, n3);
-        graph.addEdge(n2, n3);
-        graph.addEdge(n3, n4);
-        graph.addEdge(n4, n5);
 
-        graph.dijkstra_PrintPaths(n0);
+        Node[] nodes = new Node[numNodes];
+        User user = getUserEnum(userIndex);
+        Graph graph = new Graph(numNodes, nodes);
 
+        for (int i = 0; i < numNodes; i++) {
+            st = new StringTokenizer(br.readLine());
+            nodes[i] = new Node(i, Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
+        }
+
+        for (int i = 0; i < numEdges; i++) {
+            st = new StringTokenizer(br.readLine());
+            ArrayList<Integer> weights = new ArrayList<>();
+            int n1 = Integer.parseInt(st.nextToken());
+            int n2 = Integer.parseInt(st.nextToken());
+            for (int j = 0; j < numUsers; j++) {
+                weights.add(Integer.parseInt(st.nextToken()));
+            }
+            graph.addEdge(nodes[n1], nodes[n2], weights);
+        }
+
+        // run and print shortest path for a sourceNode, destinationNode, and user
+        graph.dijkstra_PrintPaths(nodes[sourceIndex], nodes[destinationIndex], user);
+
+    }
+
+    public static User getUserEnum(int userIndex) {
+        switch (userIndex) {
+            case 1:
+                return User.WHEELCHAIR;
+            case 2:
+                return User.COLOR_BLIND;
+            case 0:
+            default:
+                return User.NORMAL;
+        }
     }
 
 }

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5db71a43-d078-410a-8496-5f57406da2d8" name="Default Changelist" comment="" />
+    <list default="true" id="5db71a43-d078-410a-8496-5f57406da2d8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RAMPRoute/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RAMPRoute/Driver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RAMPRoute/Graph.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RAMPRoute/Graph.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Edge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Edge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Node.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +22,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -22,7 +31,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1rSYg5WuahJTi2kEmUTnTS51NiI" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
   </component>
   <component name="RunDashboard">
@@ -66,9 +77,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Test$Graph" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test$Graph" />
+      <module name="RAMPRoute" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Driver" />
+        <item itemvalue="Application.Test$Graph" />
         <item itemvalue="Application.DijkstraPrintPaths$Graph" />
         <item itemvalue="Application.AStarPrintRoute$Graph" />
         <item itemvalue="Application.Dijkstra" />
@@ -87,5 +106,16 @@
       <updated>1618971065689</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
