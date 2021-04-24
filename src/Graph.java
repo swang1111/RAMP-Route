@@ -1,8 +1,6 @@
 // Modified from online Dijkstras SP code
 // Original source: https://algorithms.tutorialhorizon.com/print-all-paths-in-dijkstras-shortest-path-algorithm/
 
-import javafx.util.Pair;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -127,4 +125,22 @@ public class Graph {
         System.out.print(destination + " ");
     }
 
+}
+
+class Pair<K, V> {
+    public final K key;
+    public final V value;
+
+    Pair (K key, V value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public K getKey() {
+        return key;
+    }
+
+    public V getValue() {
+        return value;
+    }
 }

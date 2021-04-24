@@ -7,61 +7,70 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
+import org.json.simple.parser.ParseException;
+
 public class Driver {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
 
-        // Input format (can change, possibly change to JSON?)
-        // numNodes numEdges numUsers startIndex endIndex userIndex
-        // next numNodes lines --> (x, y)
-        // next numEdges lines (n1 connected to n2) --> (n1, n2, w1, w2, w3)
-        BufferedReader br = new BufferedReader(new FileReader("Input.txt"));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        Object obj = new JSONParser().parse(new FileReader("RAMP-Route/ex_input.json"));
+        JSONObject jo = (JSONObject) obj;
 
-        int numNodes = Integer.parseInt(st.nextToken());
-        int numEdges = Integer.parseInt(st.nextToken());
-        int numUsers = Integer.parseInt(st.nextToken());
-        int startIndex = Integer.parseInt(st.nextToken());
-        int endIndex = Integer.parseInt(st.nextToken());
-        int userIndex = Integer.parseInt(st.nextToken());
+        JSONArray nodesArr = (JSONArray) jo.get("nodes");
+        JSONArray edgesArr = (JSONArray) jo.get("edges");
 
+        Integer startIndex = ((Long) jo.get("startIndex")).intValue();
+        Integer endIndex = ((Long) jo.get("endIndex")).intValue();
+        String userType = (String) jo.get("userType");
+
+        int numNodes = nodesArr.size();
+        int numEdges = edgesArr.size();
 
         Node[] nodes = new Node[numNodes];
-        User user = getUserEnum(userIndex);
+        User user = getUserEnum(userType);
         Graph graph = new Graph(numNodes, nodes);
 
         for (int i = 0; i < numNodes; i++) {
-            st = new StringTokenizer(br.readLine());
-            nodes[i] = new Node(i, Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
+            JSONObject node = (JSONObject) nodesArr.get(i);
+            Integer nodeIndex = ((Long) node.get("index")).intValue();
+            Integer x = ((Long) node.get("x")).intValue();
+            Integer y = ((Long) node.get("y")).intValue();
+            nodes[i] = new Node(nodeIndex, x, y);
         }
 
         for (int i = 0; i < numEdges; i++) {
-            st = new StringTokenizer(br.readLine());
+            JSONObject edge = (JSONObject) edgesArr.get(i);
+            JSONArray nodeIndices = (JSONArray) edge.get("node indices");
+            int n1 = ((Long) nodeIndices.get(0)).intValue();
+            int n2 = ((Long) nodeIndices.get(1)).intValue();
+
             ArrayList<Integer> weights = new ArrayList<>();
-            int n1 = Integer.parseInt(st.nextToken());
-            int n2 = Integer.parseInt(st.nextToken());
-            for (int j = 0; j < numUsers; j++) {
-                weights.add(Integer.parseInt(st.nextToken()));
-            }
+            weights.add(((Long) edge.get("default weight")).intValue());
+            weights.add(((Long) edge.get("power wheelchair weight")).intValue());
+            weights.add(((Long) edge.get("manual wheelchair weight")).intValue());
+            weights.add(((Long) edge.get("color blind weight")).intValue());
+            weights.add(((Long) edge.get("autistic weight")).intValue());
+
             graph.addEdge(nodes[n1], nodes[n2], weights);
         }
 
-        // run and print shortest path for a startNode, endNode, and user
         graph.aStarPrintPaths(nodes[startIndex], nodes[endIndex], user);
-
     }
 
-    public static User getUserEnum(int userIndex) {
-        switch (userIndex) {
-            case 1:
+    public static User getUserEnum(String userType) {
+        switch (userType) {
+            case "POWER_WHEELCHAIR":
                 return User.POWER_WHEELCHAIR;
-            case 2:
+            case "MANUAL_WHEELCHAIR":
                 return User.MANUAL_WHEELCHAIR;
-            case 3:
+            case "COLOR_BLIND":
                 return User.COLOR_BLIND;
-            case 4:
+            case "AUTISTIC":
                 return User.AUTISTIC;
-            case 0:
+            case "DEFAULT":
             default:
                 return User.DEFAULT;
         }
