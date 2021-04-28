@@ -1,18 +1,18 @@
 // Modified from online Dijkstras SP code
 // Original source: https://algorithms.tutorialhorizon.com/print-all-paths-in-dijkstras-shortest-path-algorithm/
 
-import java.io.FileReader;
-import java.util.ArrayList;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.*;
+import org.json.simple.parser.JSONParser;
+
+import java.io.FileReader;
+import java.util.ArrayList;
 
 public class Driver {
 
     public static void main(String[] args) throws Exception {
 
-        Object obj = new JSONParser().parse(new FileReader("RAMP-Route/ex_input.json"));
+        Object obj = new JSONParser().parse(new FileReader("ex_input.json"));
         JSONObject jo = (JSONObject) obj;
 
         JSONArray nodesArr = (JSONArray) jo.get("nodes");
@@ -20,13 +20,11 @@ public class Driver {
 
         Integer startIndex = ((Long) jo.get("startIndex")).intValue();
         Integer endIndex = ((Long) jo.get("endIndex")).intValue();
-        String userType = (String) jo.get("userType");
 
         int numNodes = nodesArr.size();
         int numEdges = edgesArr.size();
 
         Node[] nodes = new Node[numNodes];
-        User user = getUserEnum(userType);
         Graph graph = new Graph(numNodes, nodes);
 
         for (int i = 0; i < numNodes; i++) {
@@ -53,20 +51,24 @@ public class Driver {
             graph.addEdge(nodes[n1], nodes[n2], weights);
         }
 
-        graph.aStarPrintPaths(nodes[startIndex], nodes[endIndex], user);
+        for (int i = 0; i < 5; i++) {
+            User user = getUserEnum(i);
+            graph.aStarPrintPaths(nodes[startIndex], nodes[endIndex], user);
+        }
+
     }
 
-    public static User getUserEnum(String userType) {
+    public static User getUserEnum(int userType) {
         switch (userType) {
-            case "POWER_WHEELCHAIR":
+            case 1:
                 return User.POWER_WHEELCHAIR;
-            case "MANUAL_WHEELCHAIR":
+            case 2:
                 return User.MANUAL_WHEELCHAIR;
-            case "COLOR_BLIND":
+            case 3:
                 return User.COLOR_BLIND;
-            case "AUTISTIC":
+            case 4:
                 return User.AUTISTIC;
-            case "DEFAULT":
+            case 0:
             default:
                 return User.DEFAULT;
         }

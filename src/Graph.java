@@ -99,7 +99,7 @@ public class Graph {
                     }
                     if (nextIndex == endNode.index) {
                         // print a* path
-                        printAStar(parentIndices, minDists, startIndex, endNode.index);
+                        printAStar(parentIndices, minDists, startIndex, endNode.index, user);
                         return;
                     }
                 }
@@ -108,10 +108,11 @@ public class Graph {
         System.out.println("Error");
     }
 
-    public void printAStar(int[] parent, int[] distance, int sourceIndex, int destinationIndex) {
-        System.out.println("A* Algorithm: ");
+    public void printAStar(int[] parent, int[] distance, int sourceIndex, int destinationIndex, User user) {
+        System.out.println("Path for " + user + ": ");
         System.out.print(" " + sourceIndex + " --> " + destinationIndex + ": distance = " + distance[destinationIndex] + "  Path : ");
         printPathUtil(parent, destinationIndex);
+        System.out.println();
         System.out.println();
     }
 
