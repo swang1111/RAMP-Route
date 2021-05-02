@@ -1,0 +1,79 @@
+{
+  "nodes" : [
+    {"index": 0, "x": 1,"y": 1},
+    {"index": 1, "x": 3,"y": 3},
+    {"index": 2, "x": 2,"y": 2},
+    {"index": 3,"x": 4,"y": 4},
+    {"index": 4, "x": 1,"y": 0},
+    {"index": 5, "x": 5,"y": 1}
+  ],
+
+  "edges" : [
+    {
+      "node indices" : [0, 1],
+      "default weight" : 2,
+      "power wheelchair weight" : 5,
+      "manual wheelchair weight" : 3,
+      "color blind weight" : 1,
+      "autistic weight" : 1,
+      "blind weight" : 6
+    },
+    {
+      "node indices" : [0, 2],
+      "default weight" : 2,
+      "power wheelchair weight" : 6,
+      "manual wheelchair weight" : 2,
+      "color blind weight" : 1,
+      "autistic weight" : 1,
+      "blind weight" : 8
+    },
+    {
+      "node indices" : [1, 2],
+      "default weight" : 3,
+      "power wheelchair weight" : 7,
+      "manual wheelchair weight" : 4,
+      "color blind weight" : 1,
+      "autistic weight" : 1,
+      "blind weight" : 7
+    },
+    {
+      "node indices" : [1, 3],
+      "default weight" : 1,
+      "power wheelchair weight" : 3,
+      "manual wheelchair weight" : 4,
+      "color blind weight" : 3,
+      "autistic weight" : 1,
+      "blind weight" : 5
+    },
+    {
+      "node indices" : [2, 3],
+      "default weight" : 3,
+      "power wheelchair weight" : 7,
+      "manual wheelchair weight" : 4,
+      "color blind weight" : 1,
+      "autistic weight" : 1,
+      "blind weight" : 2
+    },
+    {
+      "node indices" : [3, 4],
+      "default weight" : 4,
+      "power wheelchair weight" : 7,
+      "manual wheelchair weight" : 5,
+      "color blind weight" : 1,
+      "autistic weight" : 1,
+      "blind weight" : 5
+    },
+    {
+      "node indices" : [4, 5],
+      "default weight" : 2,
+      "power wheelchair weight" : 2,
+      "manual wheelchair weight" : 6,
+      "color blind weight" : 1,
+      "autistic weight" : 2,
+      "blind weight" : 3
+      }
+  ],
+
+  "startIndex" : 0,
+  "endIndex" : 5
+}

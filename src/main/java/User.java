@@ -3,5 +3,6 @@ public enum User {
     POWER_WHEELCHAIR,
     MANUAL_WHEELCHAIR,
     COLOR_BLIND,
-    AUTISTIC
+    AUTISTIC,
+    BLIND
 }

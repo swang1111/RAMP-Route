@@ -12,7 +12,7 @@ public class Driver {
 
     public static void main(String[] args) throws Exception {
 
-        Object obj = new JSONParser().parse(new FileReader("ex_input.json"));
+        Object obj = new JSONParser().parse(new FileReader("example_input_6_users.json"));
         JSONObject jo = (JSONObject) obj;
 
         JSONArray nodesArr = (JSONArray) jo.get("nodes");
@@ -47,11 +47,12 @@ public class Driver {
             weights.add(((Long) edge.get("manual wheelchair weight")).intValue());
             weights.add(((Long) edge.get("color blind weight")).intValue());
             weights.add(((Long) edge.get("autistic weight")).intValue());
+            weights.add(((Long) edge.get("blind weight")).intValue());
 
             graph.addEdge(nodes[n1], nodes[n2], weights);
         }
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             User user = getUserEnum(i);
             graph.aStarPrintPaths(nodes[startIndex], nodes[endIndex], user);
         }
@@ -68,6 +69,8 @@ public class Driver {
                 return User.COLOR_BLIND;
             case 4:
                 return User.AUTISTIC;
+            case 5:
+                return User.BLIND;
             case 0:
             default:
                 return User.DEFAULT;

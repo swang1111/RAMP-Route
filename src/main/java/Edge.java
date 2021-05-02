@@ -31,6 +31,8 @@ public class Edge {
                 return weights.get(3);
             case AUTISTIC:
                 return weights.get(4);
+            case BLIND:
+                return weights.get(5);
             case DEFAULT:
             default:
                 return weights.get(0);
