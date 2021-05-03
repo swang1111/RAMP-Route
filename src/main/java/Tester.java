@@ -22,9 +22,7 @@ public class Tester {
         while (count < numNodes) {
             int x = random.nextInt(MAX_XPOS);
             int y = random.nextInt(MAX_YPOS);
-            if (x == y) {
-                continue;
-            }
+            // todo can add a check to see if node (x,y) already exists in nodes in case
             Node n = new Node(count, x, y);
             nodes[count] = n;
             count++;
